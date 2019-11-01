@@ -8,12 +8,73 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import Calculater from './Calculater';
-export default function HomePage() {
-  return ( 
+import { connect } from 'react-redux';
+import { useInjectReducer } from 'utils/injectReducer';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectValue } from './selectors';
+import reducer from './reducer';
+import * as actions from './actions';
+import Calculater from './../../components/Calculater';
+
+const key = 'home';
+export function HomePage({ 
+  number,
+  onGetResult,
+  onAddNumber,
+  onClear,
+  onDel }) 
+  {
+  useInjectReducer({ key, reducer });
+
+  var addNumber = e => {
+    if (Number.isInteger(number)) {
+      // number = '';
+      onClear();
+    }
+    //(number + e);
+    onAddNumber(e);
+    // console.log(number);
+  };
+
+  const getResult = () => {
+    onGetResult();
+  };
+
+  const clear = () => {
+    onClear();
+  };
+
+  const del = () => {
+    // (number.toString(10).slice(0, -1));
+    onDel();
+  };
+  return (
     <div>
       <FormattedMessage {...messages.header} />
-      <Calculater />
-    </div>  
+      <Calculater
+        number={number}
+        addNumber={addNumber}
+        getResult={getResult}
+        del={del}
+        clear={clear}
+      />
+    </div>
   );
 }
+const mapStateToProps = createStructuredSelector({
+  number: makeSelectValue(),
+});
+export function mapDispatchToProps(dispatch) {
+  return {
+    // onSetValue: () => dispatch(actions.setValue()),
+    onGetResult: () => dispatch(actions.getResult()),
+    onClear: () => dispatch(actions.clear()),
+    onDel: () => dispatch(actions.del()),
+    onAddNumber: value => dispatch(actions.addNumber(value)),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HomePage);

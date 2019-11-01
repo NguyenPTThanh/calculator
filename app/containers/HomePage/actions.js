@@ -1,9 +1,8 @@
-
 import * as types from './constants';
-export function getResult(value) {
+export function getResult() {
   return {
     type: types.GET_RESULT,
-    value,
+    
   };
 }
 export function setValue(value) {
@@ -11,4 +10,20 @@ export function setValue(value) {
     type: types.SET_VALUE,
     value,
   };
+}
+export function addNumber(value) {
+  return {
+    type: types.ADD_NUMBER,
+    value ,
+  };
+}
+export function clear() {
+  return {
+    type: types.CLEAR,
+  };
+}
+export function del(){
+  return {
+    type : types.DEL , 
+  }
 }
