@@ -8,11 +8,12 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-
+import Calculater from './Calculater';
 export default function HomePage() {
-  return (
-    <h1>
+  return ( 
+    <div>
       <FormattedMessage {...messages.header} />
-    </h1>
+      <Calculater />
+    </div>  
   );
 }
