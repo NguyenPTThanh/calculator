@@ -66,7 +66,6 @@ const mapStateToProps = createStructuredSelector({
 });
 export function mapDispatchToProps(dispatch) {
   return {
-    // onSetValue: () => dispatch(actions.setValue()),
     onGetResult: () => dispatch(actions.getResult()),
     onClear: () => dispatch(actions.clear()),
     onDel: () => dispatch(actions.del()),
