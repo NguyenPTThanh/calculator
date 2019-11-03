@@ -17,13 +17,12 @@ import * as actions from './actions';
 import Calculater from './../../components/Calculater';
 
 const key = 'home';
-export function HomePage({ 
-  number,
-  onGetResult,
-  onAddNumber,
-  onClear,
-  onDel }) 
-  {
+export function HomePage({
+   number, 
+   onGetResult, 
+   onAddNumber, 
+   onClear, 
+   onDel }) {
   useInjectReducer({ key, reducer });
 
   var addNumber = e => {
